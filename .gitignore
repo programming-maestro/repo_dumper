@@ -68,6 +68,7 @@ output/
 # =========================
 # Secrets / Local Config
 # =========================
+.venv
 .env
 .env.*
 config.local.py
