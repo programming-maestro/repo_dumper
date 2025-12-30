@@ -3,6 +3,7 @@ from tkinter import ttk, filedialog, messagebox
 from repo_scanner import scan_repository
 from repo_writer import write_output_file
 import threading
+import os
 
 
 class RepoDumperGUI:
@@ -11,6 +12,18 @@ class RepoDumperGUI:
         self.root.title("Git Repository Dumper")
         self.root.geometry("720x360")
         self.root.minsize(720, 360)
+
+        icon_path = os.path.join(
+            os.path.dirname(__file__),
+            "assets",
+            "repo_dumper.ico"
+        )
+        # setting up icon
+        if os.path.exists(icon_path):
+            try:
+                self.root.iconbitmap(icon_path)
+            except Exception:
+                pass
 
         self.repo_path = tk.StringVar()
         self.output_file = tk.StringVar()
@@ -117,12 +130,19 @@ class RepoDumperGUI:
 
     def generate(self):
         try:
-            structure, contents = scan_repository(self.repo_path.get())
-            write_output_file(self.output_file.get(), structure, contents)
+            structure, contents, stats = scan_repository(self.repo_path.get())
+
+            write_output_file(
+                self.output_file.get(),
+                structure,
+                contents,
+                stats
+            )
 
             self.root.after(0, self.on_success)
+
         except Exception as e:
-            self.root.after(0, lambda: self.on_error(e))
+            self.root.after(0, lambda err=e: self.on_error(err))
 
     def on_success(self):
         self.generate_btn.config(state="normal")

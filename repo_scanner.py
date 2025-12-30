@@ -1,6 +1,10 @@
 import os
 import pathspec
-from utils import is_binary_file
+from utils import (
+    is_binary_file,
+    is_large_file,
+    looks_binary_by_content
+)
 
 # Hard exclusions (never shown)
 ALWAYS_IGNORE_DIRS = {
@@ -25,6 +29,12 @@ def load_gitignore(path):
 def scan_repository(repo_root):
     structure = []
     contents = []
+    stats = {
+        "files_total": 0,
+        "files_dumped": 0,
+        "files_skipped": 0,
+        "folders_total": 0
+    }
 
     repo_root = os.path.abspath(repo_root)
 
@@ -53,6 +63,7 @@ def scan_repository(repo_root):
             spec = local_spec or parent_spec
 
         indent = "│   " * depth
+        stats["folders_total"] += 1
         structure.append(f"{indent}📁 {folder_name}/")
 
         try:
@@ -77,9 +88,20 @@ def scan_repository(repo_root):
                 walk(full_entry, spec, depth + 1)
 
             elif os.path.isfile(full_entry):
+                stats["files_total"] += 1
                 structure.append(f"{entry_indent}📄 {entry}")
 
-                if is_binary_file(full_entry):
+                # Skip images, media, binaries, large files
+                if (
+                        is_binary_file(full_entry)
+                        or looks_binary_by_content(full_entry)
+                        or is_large_file(full_entry)
+                ):
+                    stats["files_skipped"] += 1
+                    contents.append({
+                        "path": rel_entry,
+                        "content": "[BINARY / MEDIA FILE SKIPPED]"
+                    })
                     continue
 
                 try:
@@ -88,11 +110,13 @@ def scan_repository(repo_root):
                             "path": rel_entry,
                             "content": f.read()
                         })
+                        stats["files_dumped"] += 1
                 except Exception:
+                    stats["files_skipped"] += 1
                     contents.append({
                         "path": rel_entry,
                         "content": "[ERROR READING FILE]"
                     })
 
     walk(repo_root, None, 0)
-    return structure, contents
+    return structure, contents, stats

@@ -38,3 +38,8 @@ repo_dumper/
 ├── repo_writer.py       # Output file formatting
 ├── utils.py             # Helper utilities
 └── requirements.txt     # External dependencies
+```
+
+## Binary [exe]
+- pip install pyinstaller
+- pyinstaller --onefile --windowed --name RepoDumper repo_dumper_gui.py
