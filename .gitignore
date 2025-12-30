@@ -10,62 +10,82 @@ __pycache__/
 # C extensions
 *.so
 
-# Virtual environments
+# =========================
+# Virtual Environments
+# =========================
 venv/
 .venv/
 env/
 ENV/
+.venv.*
 
-# Distribution / packaging
+# =========================
+# Packaging / Distribution
+# =========================
 build/
 dist/
 *.egg-info/
 .eggs/
+*.spec
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
+# =========================
+# Testing / Coverage
+# =========================
 htmlcov/
 .tox/
 .nox/
 .coverage
 .coverage.*
-.cache
+.cache/
 pytest_cache/
 
-# MyPy / Pyright
+# =========================
+# Type Checking
+# =========================
 .mypy_cache/
 .pyre/
 .pytype/
 
+# =========================
 # Jupyter
+# =========================
 .ipynb_checkpoints/
 
 # =========================
-# PyCharm / IntelliJ IDEA
+# Logs & Runtime Files
 # =========================
-
-.idea/
-*.iml
-
-# PyCharm specific
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/shelf
-
-# =========================
-# Logs & runtime files
-# =========================
-
 *.log
 logs/
 *.pid
 
 # =========================
-# OS-specific
+# Databases & Output
+# =========================
+*.sqlite3
+output/
+*.zip
+
+# =========================
+# Secrets / Local Config
+# =========================
+.env
+.env.*
+config.local.py
+settings.local.py
+
+# =========================
+# IDEs & Editors
+# =========================
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# =========================
+# OS-Specific Files
 # =========================
 
 # Windows
@@ -75,20 +95,5 @@ Desktop.ini
 # macOS
 .DS_Store
 
-# Linux
+# Linux / Unix
 *~
-
-# =========================
-# Secrets / local configs
-# =========================
-
-.env
-.env.*
-.venv.*
-config.local.py
-settings.local.py
-
-
-*.sqlite3
-*.zip
-output/
