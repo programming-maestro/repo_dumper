@@ -1,0 +1,94 @@
+# =========================
+# Python
+# =========================
+
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+
+# MyPy / Pyright
+.mypy_cache/
+.pyre/
+.pytype/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# =========================
+# PyCharm / IntelliJ IDEA
+# =========================
+
+.idea/
+*.iml
+
+# PyCharm specific
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/shelf
+
+# =========================
+# Logs & runtime files
+# =========================
+
+*.log
+logs/
+*.pid
+
+# =========================
+# OS-specific
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# =========================
+# Secrets / local configs
+# =========================
+
+.env
+.env.*
+.venv.*
+config.local.py
+settings.local.py
+
+
+*.sqlite3
+*.zip
+output/
