@@ -135,20 +135,6 @@ The generated text file contains:
 
 ---
 
-## 🪟 Build Windows Executable (Optional)
-
-```bash
-pip install pyinstaller
-pyinstaller --onefile --windowed --icon=assets/repo_dumper.ico app.py
-```
-
-Output will be available in:
-```text
-/dist
-```
-
----
-
 ## 🧠 Ideal Use Cases
 
 - Sharing repositories with LLMs (ChatGPT, Claude, Gemini)
