@@ -7,7 +7,7 @@ from utils.file_utils import (
 )
 
 ALWAYS_IGNORE_DIRS = {".git", ".idea", ".venv", "__pycache__"}
-ALWAYS_IGNORE_FILES = {".gitignore"}
+ALWAYS_IGNORE_FILES = {".gitignore", "package-lock.json", "README.md"}
 
 
 def load_gitignore(path):
