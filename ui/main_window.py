@@ -1,7 +1,8 @@
-import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
-import threading
+import sys
 import os
+import tkinter as tk
+from tkinter import ttk, filedialog, messagebox, PhotoImage
+import threading
 
 from core.scanner import scan_repository
 from core.writer import write_output_file
@@ -20,14 +21,26 @@ class RepoDumperApp:
         self._build_layout()
 
     # ---------- Setup ----------
+    @staticmethod
+    def resource_path(relative_path):
+        """
+        Get absolute path to resource, works for dev and PyInstaller
+        """
+        try:
+            base_path = sys._MEIPASS  # PyInstaller temp folder
+        except AttributeError:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
     def _load_icon(self):
-        icon = os.path.join("assets", "repo_dumper.ico")
-        if os.path.exists(icon):
-            try:
-                self.root.iconbitmap(icon)
-            except Exception:
-                pass
+        try:
+            icon_path = RepoDumperApp.resource_path(
+                os.path.join("assets", "repo_dumper.ico")
+            )
+            self.root.iconbitmap(icon_path)
+        except Exception:
+            pass
 
     def _init_vars(self):
         self.repo_path = tk.StringVar()
@@ -193,3 +206,4 @@ class RepoDumperApp:
         self.status.set("Failed")
         self.generate_btn.config(state="normal")
         messagebox.showerror("Error", str(error))
+
